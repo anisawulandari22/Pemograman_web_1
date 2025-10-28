@@ -1,0 +1,348 @@
+# **MENU RESTORAN: HappyFood**
+
+## **index.html**
+
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <title>Anisa Wulandari</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css">
+    
+    <style>
+        :root {
+            --pastel-pink: #F7DDE8; 
+            --accent-pink: #E9A8C5; 
+            --button-pink: #E985B0; 
+            --text-color: #4A4A4A;  
+            --light-grey: #f8f9fa; 
+            --menu-bg: #FFF5FA; 
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--pastel-pink); 
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .custom-card {
+            border-top: 10px solid var(--accent-pink);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.4s ease-in-out;
+            background-color: var(--light-grey);
+        }
+        .custom-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .btn-pastel {
+            background-color: var(--button-pink);
+            border-color: var(--button-pink);
+            color: white; 
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-pastel:hover {
+            background-color: #D6729B; 
+            border-color: #D6729B;
+            color: white;
+            transform: translateY(-2px); 
+        }
+
+        .output-box {
+            background-color: #FFF0F5; 
+            border-left: 5px solid var(--accent-pink);
+            transition: background-color 0.5s ease-out;
+        }
+
+        .menu-item-card {
+            background-color: var(--menu-bg);
+            border: 1px solid var(--accent-pink);
+            transition: all 0.3s ease;
+        }
+        .menu-item-card:hover {
+            box-shadow: 0 4px 15px rgba(233, 133, 176, 0.4);
+        }
+
+        .item-quantity {
+            text-align: center;
+            border-radius: 0.5rem !important;
+            max-width: 80px; 
+        }
+
+        .fade-in {
+            animation: fadeIn 1.2s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .heading-transition {
+            transition: color 0.6s ease-in-out;
+        }
+
+        .background-dots {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .dot {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            opacity: 0;
+            animation: floatAndFade 15s infinite ease-in-out;
+        }
+
+        @keyframes floatAndFade {
+            0% { transform: translateY(0) scale(0); opacity: 0; }
+            20% { opacity: 1; transform: translateY(-20%) scale(1); }
+            80% { opacity: 1; transform: translateY(-80%) scale(1); }
+            100% { transform: translateY(-100%) scale(0); opacity: 0; }
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="background-dots"></div>
+
+    <div class="container my-5">
+        <div class="card p-4 p-md-5 custom-card rounded-4 mx-auto fade-in" style="max-width: 900px; animation-delay: 0.2s;">
+            
+            <!-- Heading -->
+            <h1 class="h2 fw-bold mb-4 pb-2 border-bottom text-dark heading-transition text-center" id="main-heading">
+                Menu Spesial Happy Food
+            </h1>
+
+            <!-- Pengantar Menu -->
+            <p class="text-center mb-4 fade-in" style="animation-delay: 0.4s;">
+                Pilih kuantitas di bawah, lalu klik 'Pesan Sekarang' untuk mengirim pesanan Anda.
+            </p>
+            
+            <h2 class="h4 mt-4 mb-3 text-dark fw-bold fade-in" style="animation-delay: 0.8s;">Pilihan Manis Kami</h2>
+
+            <!-- SECTION: Menu Items with Quantity Input (Grid Layout) -->
+            <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+                
+                <!-- Menu Item 1: Pastel Layer Cake -->
+                <div class="col fade-in" style="animation-delay: 1s;">
+                    <div class="card menu-item-card h-100 rounded-3">
+                        <img src="https://placehold.co/400x300/F0B5C9/FFFFFF?text=Pastel+Cake" class="card-img-top rounded-top-3" alt="Pastel Layer Cake" onerror="this.onerror=null;this.src='https://placehold.co/400x300/F0B5C9/FFFFFF?text=Gambar+Rusak'" loading="lazy">
+                        <div class="card-body">
+                            <h5 class="card-title text-danger">Pastel Layer Cake</h5>
+                            <p class="card-text small text-muted mb-3">Kue berlapis lembut dengan krim *buttercream* berwarna pastel.</p>
+                            <div class="d-flex justify-content-between align-items-center pt-2 border-top">
+                                <span class="fw-bold">Rp 45.000</span>
+                                <input type="number" id="qty-cake" class="form-control form-control-sm item-quantity" value="0" min="0" data-item-name="Pastel Layer Cake" data-price="45000">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Item 2: Pink Lemonade Sparkle -->
+                <div class="col fade-in" style="animation-delay: 1.2s;">
+                    <div class="card menu-item-card h-100 rounded-3">
+                        <img src="https://placehold.co/400x300/81C6E8/FFFFFF?text=Sparkle+Drink" class="card-img-top rounded-top-3" alt="Pink Lemonade Sparkle" onerror="this.onerror=null;this.src='https://placehold.co/400x300/81C6E8/FFFFFF?text=Gambar+Rusak'" loading="lazy">
+                        <div class="card-body">
+                            <h5 class="card-title text-success">Pink Lemonade Sparkle</h5>
+                            <p class="card-text small text-muted mb-3">Minuman segar *lemonade* dengan sentuhan stroberi dan soda.</p>
+                            <div class="d-flex justify-content-between align-items-center pt-2 border-top">
+                                <span class="fw-bold">Rp 28.000</span>
+                                <input type="number" id="qty-lemonade" class="form-control form-control-sm item-quantity" value="0" min="0" data-item-name="Pink Lemonade Sparkle" data-price="28000">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Item 3: Unicorn Donut Set -->
+                <div class="col fade-in" style="animation-delay: 1.4s;">
+                    <div class="card menu-item-card h-100 rounded-3">
+                        <img src="https://placehold.co/400x300/C1A8E9/FFFFFF?text=Unicorn+Donut" class="card-img-top rounded-top-3" alt="Unicorn Donut Set" onerror="this.onerror=null;this.src='https://placehold.co/400x300/C1A8E9/FFFFFF?text=Gambar+Rusak'" loading="lazy">
+                        <div class="card-body">
+                            <h5 class="card-title text-warning">Unicorn Donut Set</h5>
+                            <p class="card-text small text-muted mb-3">Tiga donat mini dengan *glaze* warna-warni dan taburan bintang.</p>
+                            <div class="d-flex justify-content-between align-items-center pt-2 border-top">
+                                <span class="fw-bold">Rp 35.000</span>
+                                <input type="number" id="qty-donut" class="form-control form-control-sm item-quantity" value="0" min="0" data-item-name="Unicorn Donut Set" data-price="35000">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- END: Menu Items -->
+
+            
+            <!-- Area Status Pesanan -->
+            <div class="mb-5 p-3 output-box rounded text-muted fade-in" style="animation-delay: 1.6s;">
+                <span id="output-area">Klik tombol 'Pesan Sekarang' untuk mengirim pesanan Anda dan melihat total biaya.</span>
+            </div>
+
+            <!-- Tombol Interaktif -->
+            <button 
+                id="action-button"
+                onclick="submitOrder(event)"
+                class="btn btn-pastel btn-lg shadow-sm w-100 fade-in"
+                style="animation-delay: 1.8s;"
+            >
+                Pesan Sekarang
+            </button>
+            
+        </div>
+    </div>
+
+    <!-- Memuat Bootstrap JavaScript Bundle --><script src="bootstrap-5.3.8-dist/css/bootstrap.min.css">" xintegrity="</script>
+
+    <script>
+        // Fungsi untuk membuat dot-dot animasi di background
+        function createBackgroundDots() {
+            const container = document.querySelector('.background-dots');
+            const numDots = 20; 
+            for (let i = 0; i < numDots; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                dot.style.left = Math.random() * 100 + 'vw';
+                dot.style.top = Math.random() * 100 + 'vh';
+                dot.style.width = Math.random() * 10 + 5 + 'px';
+                dot.style.height = dot.style.width;
+                dot.style.animationDelay = Math.random() * -15 + 's'; 
+                container.appendChild(dot);
+            }
+        }
+
+        // Panggil fungsi saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', createBackgroundDots);
+
+        /**
+         * Fungsi pembantu untuk memformat angka menjadi mata uang Rupiah
+         */
+        function formatRupiah(angka) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(angka);
+        }
+
+        /**
+         * Fungsi JavaScript untuk simulasi pengiriman pesanan
+         */
+        function submitOrder(event) {
+            const button = event.currentTarget;
+            const outputElement = document.getElementById('output-area');
+            const headingElement = document.getElementById('main-heading');
+            
+            // 1. Efek Ripple pada tombol
+            const circle = document.createElement('span');
+            const diameter = Math.max(button.clientWidth, button.clientHeight);
+            const radius = diameter / 2;
+
+            circle.style.width = circle.style.height = `${diameter}px`;
+            circle.style.left = `${event.clientX - (button.offsetLeft + radius)}px`;
+            circle.style.top = `${event.clientY - (button.offsetTop + radius)}px`;
+            circle.classList.add('ripple');
+
+            const ripple = button.getElementsByClassName('ripple')[0];
+            if (ripple) {
+                ripple.remove();
+            }
+            button.appendChild(circle);
+
+            // 2. Mengumpulkan dan Menghitung Pesanan
+            const itemInputs = document.querySelectorAll('.item-quantity');
+            let totalBiaya = 0;
+            const pesanan = [];
+
+            itemInputs.forEach(input => {
+                const qty = parseInt(input.value);
+                const nama = input.getAttribute('data-item-name');
+                const harga = parseInt(input.getAttribute('data-price'));
+
+                if (qty > 0) {
+                    const subtotal = qty * harga;
+                    totalBiaya += subtotal;
+                    pesanan.push({ nama, qty, subtotal });
+                }
+            });
+
+            // 3. Menghasilkan Output Pesanan
+            const waktuPesanan = new Date().toLocaleTimeString('id-ID');
+            let outputHTML = '';
+            
+            headingElement.style.color = 'var(--button-pink)'; // Mengubah warna heading
+
+            if (totalBiaya === 0) {
+                // Jika tidak ada item yang dipilih
+                outputHTML = `<strong class="text-danger">PESANAN GAGAL:</strong> Anda belum memilih item apapun. Silakan tentukan kuantitas!`;
+                outputElement.parentElement.style.backgroundColor = '#FCDADA'; // Merah muda untuk error
+            } else {
+                // Jika ada item yang dipilih, tampilkan ringkasan
+                let itemSummary = pesanan.map(item => 
+                    `<li>${item.qty} x ${item.nama} (${formatRupiah(item.subtotal)})</li>`
+                ).join('');
+
+                outputHTML = `
+                    <div class="fw-bold">Pesanan Diterima!</div>
+                    <p class="mb-1">Waktu konfirmasi: ${waktuPesanan}</p>
+                    <ul class="list-unstyled small mb-1 p-2 border-top mt-2">
+                        ${itemSummary}
+                    </ul>
+                    <div class="fw-bold border-top pt-2">Total Biaya: ${formatRupiah(totalBiaya)}</div>
+                `;
+                outputElement.parentElement.style.backgroundColor = '#E9F5EF'; // Hijau muda pastel untuk sukses
+            }
+
+            outputElement.innerHTML = outputHTML;
+
+            // 4. LOGIC: Mengizinkan Multiple Clicks
+            const originalText = 'Pesan Sekarang';
+            const updatedText = 'Pesanan Dikirim!';
+
+            // Tampilkan pesan sukses sementara
+            button.textContent = updatedText; 
+            
+            // Setelah 1.5 detik, kembalikan teks tombol ke keadaan semula
+            setTimeout(() => {
+                if (button.textContent === updatedText) {
+                    button.textContent = originalText;
+                }
+            }, 1500); 
+        }
+
+    </script>
+</body>
+</html>
+---
